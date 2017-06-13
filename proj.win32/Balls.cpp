@@ -61,8 +61,8 @@ unsigned int Balls::getLevel()
 }
 void Balls::updateRadius()                                          //update the radius and size when level changes
 {
-	this->setScale(sqrt(_level/10)/ 10);
-	_radius = sqrt(_level/10) * 260 / 10;
+	this->setScale(sqrt(_level/10) / 10);
+	_radius = sqrt(_level/10) * 234 / 10;
 }
 void Balls::LevelLimit()
 {
@@ -79,7 +79,7 @@ float Balls::speed()
 	return 7.25 - 0.00625*this->_level;
 }
 
-void Balls::division(float x, float y, cocos2d::EventKeyboard::KeyCode &_keycode, cocos2d::Layer* _Battelfield, cocos2d::EventListenerKeyboard* listener)
+void Balls::division(float x, float y, cocos2d::EventKeyboard::KeyCode &_keycode, cocos2d::Layer* _Battelfield)
 {
 	
 	if (_keycode == cocos2d::EventKeyboard::KeyCode::KEY_SPACE&&this->_level > 40 && this != nullptr)
@@ -98,7 +98,6 @@ void Balls::division(float x, float y, cocos2d::EventKeyboard::KeyCode &_keycode
 		substitute->setPosition(x1,y1);
 		auto move = cocos2d::MoveBy::create(0.2f, cocos2d::Vec2(2*x2,2*y2));
 		substitute->runAction(move);
-		
 		_Battelfield->addChild(substitute, 1);
 	}
 }
@@ -130,6 +129,7 @@ void Balls::movement(float x, float y, cocos2d::Layer *_Battlefield, int player_
 		this->setPosition(x1, y1);
 	}
 }
+extern int count;
 void Balls::swallow(cocos2d::Layer *_Battlefield)
 {
 	cocos2d::Vector<Node*> _allballs;
@@ -146,10 +146,12 @@ void Balls::swallow(cocos2d::Layer *_Battlefield)
 				{
 					_Battlefield->removeChild(target_b);
 					this->addLevel(target_b->_level);
+					if (target_b->getID() == 0)count -= 1;
 				}
 				else if (this->_level < target_b->_level)
 				{
 					_Battlefield->removeChild(this);
+					if (this->getID() == 0)count -= 1;
 				}
 			}
 		}
