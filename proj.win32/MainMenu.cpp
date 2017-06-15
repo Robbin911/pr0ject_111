@@ -79,15 +79,15 @@ bool MainBG::init()
 	this->addChild(test1, 1);
 	Balls*test2 = Balls::createWithFileName("huaji.png");
 	test2->initStatus(100,0);
-	test2->setPosition(Vec2(visibleSize.width / 2 + originPos.x - 300, visibleSize.height / 2 + originPos.y));
-	this reateWithFileName("huaji.png");
+	test2->setPosition(Vec2(visibleSize.width / 2 + originPos.x - 300, visibleSize.height / 2 + originPos.y));*/
+	Balls*test3 = Balls::createWithFileName("huaji.png");
 	test3->initStatus(500,0);
 	test3->setPosition(Vec2(visibleSize.width / 2 + originPos.x - 300, visibleSize.height / 2 + originPos.y + 300));
 	this->addChild(test3, 1);
 	Balls*test4 = Balls::createWithFileName("huaji.png");
-	test4->initStatus(1000,0);
-	test4->setPosition(Vec2(visibleSize.width / 2 + originPos.x - 300, visibleSize.height / 2 + originPos.y - 300));
-	this->addChild(test4, 1);*/
+	test4->initStatus(4000,0);
+	test4->setPosition(Vec2(visibleSize.width / 2 + originPos.x - 500, visibleSize.height / 2 + originPos.y - 300));
+	this->addChild(test4, 1);
 	auto m_listener = EventListenerMouse::create();
 	m_listener->onMouseMove = [=](Event* event)
 	{
@@ -102,8 +102,8 @@ bool MainBG::init()
 		_keycode = keycode;
 	};
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(k_listener, this);
-//	this->schedule(schedule_selector(MainBG::update), 0.03333f);
-	this->scheduleUpdate();
+	this->schedule(schedule_selector(MainBG::update), 0.03333f);
+	//this->scheduleUpdate();
 	return true;
 }
 void MainBG::update(float dt)
@@ -118,8 +118,10 @@ void MainBG::update(float dt)
 			target->setPosition(Vec2(640, 360));
 		}
 		Balls* target_b = dynamic_cast<Balls*>(target);
+		
 		if (target_b != nullptr&&target_b->getID() != 0)
 		{
+			
 			target_b->LevelLimit();
 			target_b->movement(x,y,this,1);
 			target_b->swallow(this);

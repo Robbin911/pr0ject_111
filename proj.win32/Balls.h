@@ -12,6 +12,7 @@ private:
 public:
 	bool isfood;
 	//skill to be done
+	void skill(cocos2d::Layer *_Combat , int ball, cocos2d::EventKeyboard::KeyCode &_keycode);
 	static Balls* createWithFileName(const std::string & filename);
 	static Balls* createWithBallsFrame(cocos2d::SpriteFrame *spriteFrame);
 	bool initStatus(int tlevel, int id);
@@ -24,6 +25,7 @@ public:
 	void addLevel(const int delLevel);                           //after eating other balls,call this
 	void LevelLimit();
 	float speed();
+	float speedBIG();
 	void division(float x, float y, cocos2d::EventKeyboard::KeyCode &_keycode, cocos2d::Layer* _Battelfield);
 	void movement(float x, float y, cocos2d::Layer *_Battlefield, int player_id);
 	void swallow(cocos2d::Layer *_Battlefield);

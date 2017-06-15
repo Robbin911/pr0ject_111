@@ -80,7 +80,10 @@ float Balls::speed()
 	if (this->_level > 1000)this->_level = 1000;
 	return 7.25 - 0.00625*this->_level;
 }
-
+float Balls::speedBIG()
+{
+	return 7.00f;
+}
 void Balls::division(float x, float y, cocos2d::EventKeyboard::KeyCode &_keycode, cocos2d::Layer* _Battelfield)
 {
 	
@@ -158,5 +161,13 @@ void Balls::swallow(cocos2d::Layer *_Battlefield)
 				}
 			}
 		}
+	}
+}
+void Balls::skill(cocos2d::Layer *_Combat, int ball, cocos2d::EventKeyboard::KeyCode &_keycode)
+{
+	if (_keycode == cocos2d::EventKeyboard::KeyCode::KEY_R&& this != nullptr)
+	{
+		float rotate;
+		this->setRotation(rotate);
 	}
 }
